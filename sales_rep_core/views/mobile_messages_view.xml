@@ -1,0 +1,44 @@
+<odoo>
+    <record id="mobile_messages_form_view" model="ir.ui.view">
+        <field name="name">mobile.messages.form.view</field>
+        <field name="model">mobile.messages</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mobile_messages_tree_view" model="ir.ui.view">
+        <field name="name">mobile.messages.tree.view</field>
+        <field name="model">mobile.messages</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mobile_messages_action" model="ir.actions.act_window">
+        <field name="name">Mobile Messages</field>
+        <field name="res_model">mobile.messages</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Message
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+            id="menu_mobile_messages"
+            name="Mobile Messages"
+            action="mobile_messages_action"
+            parent="menu_sale_operation_root"
+            sequence="10"
+            groups="base.group_user"/>
+</odoo>

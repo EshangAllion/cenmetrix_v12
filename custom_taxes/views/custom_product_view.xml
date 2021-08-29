@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="product_template_inherit" model="ir.ui.view">
+            <field name="name">product.template.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr= "//field[@name = 'list_price']" position="after">
+                    <!--                                    new product added to the product card-->
+                    <field name="vat_product" required="True"/>
+                </xpath>
+                <xpath expr= "//field[@name = 'taxes_id']" position="replace">
+                    <!--                                    tax field is inherited-->
+                    <field name="taxes_id" widget="many2many_tags" attrs="{'invisible':[('vat_product', '=', 'nonvat')], 'required':[('vat_product', '=', 'vat')]}" />
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="product_form_modifications">
+            <field name="name">product.product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr= "//field[@name = 'lst_price']" position="after">
+                    <!--                                    new product added to the product card-->
+                    <field name="vat_product" required="True"/>
+                </xpath>
+                <xpath expr= "//field[@name = 'taxes_id']" position="replace">
+                    <!--                                    tax field is inherited-->
+                    <field name="taxes_id" widget="many2many_tags" attrs="{'invisible':[('vat_product', '=', 'nonvat')], 'required':[('vat_product', '=', 'vat')]}" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

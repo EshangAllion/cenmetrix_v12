@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inherit_sale_order_view_form" model="ir.ui.view">
+        <field name="name">inherit.sale.order.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" widget="statusbar" options="{'fold_field': 'fold'}"/>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <button name="approve_credit_limit" string="Approve" type="object" groups="partner_credit_limit.group_sales_approve_group" class="oe_highlight" attrs="{'invisible': [('state', 'in', ('draft', 'sent', 'sale', 'cancel', 'done'))]}"/>
+<!--                <button name="send_pending" string="Get Approval" type="object" attrs="{'invisible': [('state', 'in', ('pending', 'sent', 'sale', 'cancel', 'done'))]}"/>-->
+            </xpath>
+        </field>
+    </record>
+</odoo>

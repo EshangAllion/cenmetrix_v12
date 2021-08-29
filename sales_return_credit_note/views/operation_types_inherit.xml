@@ -1,0 +1,11 @@
+<odoo>
+    <record id="operations_types_inherit_view" model="ir.ui.view">
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='show_reserved']" position="after">
+                <field name="is_invoice_return"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

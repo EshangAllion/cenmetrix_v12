@@ -1,0 +1,21 @@
+{
+	'name': 'Custom Invoice',
+	'sequence': 1,
+	'version': '0.3',
+	'summary': 'Custom invoice',
+	'author': 'Allion Technologies PVT Ltd',
+	'maintainer': 'Allion Technologies PVT Ltd',
+	'company': 'Allion',
+	'website': 'http://www.alliontechnologies.com/',
+	'depends': ['base', 'account', 'sale', 'so_create_invoice_and_validate'],
+	'data': [
+		'views/inherit_sale_order_view.xml',
+		'views/inherit_payment_term_view.xml',
+		'views/inherit_invoice_view.xml',
+	],
+	'images': [],
+	'license': 'AGPL-3',
+	'installable': True,
+	'application': True,
+	'auto_install': False,
+}

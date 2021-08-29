@@ -1,0 +1,26 @@
+{
+    'name': 'Core of Sales Rep Project',
+    'sequence': 0,
+    'version': '1.0',
+    'summary': "Core features are added in this module",
+    'author': 'Centrics Business Solutions PVT Ltd',
+    'company': 'Centrics Business Solutions PVT Ltd',
+    'website': 'http://www.centrics.cloud/',
+    'depends': ['sale', 'product'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/main_menuitem.xml',
+        'views/inherit_product.xml',
+        'views/inherit_res_partner.xml',
+        'views/monthly_allocation_view.xml',
+        'views/customer_visits.xml',
+        'views/visit_allocation_view.xml',
+        'views/inherit_res_users_view.xml',
+        'views/mobile_messages_view.xml',
+    ],
+    'demo': [
+    ],
+    'application': True,
+    'installable': True,
+    'auto_install': False,
+}

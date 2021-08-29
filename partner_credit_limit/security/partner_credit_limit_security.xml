@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="group_invoice_back_date">
+            <field name="name">Invoice Back-Date</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record id="group_invoice_back_date_readonly" model="res.groups">
+            <field name="name">Invoice Date Read Only</field>
+            <field name="comment">Invoice Date Read Only(avoid back date</field>
+            <field name="category_id" ref="group_invoice_back_date"/>
+        </record>
+        <record id="group_invoice_back_date_editable" model="res.groups">
+            <field name="name">Invoice Date Editable</field>
+            <field name="comment">Invoice Date Editable</field>
+            <field name="category_id" ref="group_invoice_back_date"/>
+        </record>
+
+        <record model="ir.module.category" id="group_sales_approve">
+            <field name="name">Sales Approve</field>
+            <field name="sequence">0</field>
+        </record>
+
+        <record id="group_sales_approve_group" model="res.groups">
+            <field name="name">Approve Sales Orders</field>
+            <field name="comment">Approve Sales Order</field>
+            <field name="category_id" ref="group_sales_approve"/>
+        </record>
+    </data>
+</odoo>

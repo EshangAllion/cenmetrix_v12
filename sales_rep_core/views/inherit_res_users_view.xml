@@ -1,0 +1,15 @@
+<odoo>
+    <record id="inherit_view_users_simple_form" model="ir.ui.view">
+        <field name="name">inherit.res.users.simplified.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_simple_form"/>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mobile']" position="after">
+                <field name="monthly_target"/>
+                <field name="frequency" groups="base.group_no_one"/>
+                <field name="no_of_products" groups="base.group_no_one"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

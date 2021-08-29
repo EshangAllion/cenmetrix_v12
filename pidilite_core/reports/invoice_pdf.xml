@@ -1,0 +1,176 @@
+<odoo>
+    <data>
+        <template id="invoice_report_new">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="header text-left">
+                            <div name="pager" t-if="report_type == 'pdf'">
+                                <span t-field="doc.print_date"/>
+                            </div>
+                        </div>
+                        <div class="page" style="font-size:14px; padding:15px; padding-top:0px; margin-top: 0px; margin-bottom:0px; padding-bottom:0px">
+                            <table style="width: 100%;">
+                                <tr><td style="padding:2px; font-size: 20px" class="text-center"><b>R.M.C Trading</b></td></tr>
+                                <tr><td style="padding:2px; font-size: 16px" class="text-center">Niriella, Uda Niriella</td></tr>
+                                <tr><td style="padding:2px; font-size: 16px" class="text-center">Tel: 045-5670127</td></tr>
+                                <tr><td style="padding:2px; font-size: 12px" class="text-center">(Authorized Distributor For)</td></tr>
+                                <tr><td style="padding:2px; font-size: 16px" class="text-center"><b>Pidilite Lanka(Private) Limited</b></td></tr>
+                                <tr><td style="padding:2px; font-size: 12px" class="text-center">74,1/1,Orient Building,Dawson Street, Colombo 2</td></tr>
+                            </table>
+                            <br/>
+                            <table style="width: 100%;" id="total">
+                                <tr>
+                                    <td style="width: 45%;">
+                                        <table>
+                                            <tr>
+                                                <td style="border-left: solid 1px; border-top: solid 1px; padding:5px; width: 18%;">Customer:</td>
+                                                <td style="border-right: solid 1px; border-top: solid 1px; padding:5px; width: 25%;"><span t-field="doc.partner_id"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-bottom: solid 1px; border-left: solid 1px; padding:5px; width: 15%;">Address:</td>
+                                                <td style="border-bottom: solid 1px; border-right: solid 1px; padding:5px; width: 25%;"><span t-esc="doc.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>&#160;</td>
+                                    <td style="width: 45%;">
+                                        <table>
+                                            <tr>
+                                                <td style="border-left: solid 1px; border-top: solid 1px; padding:5px; width: 18%;">INVOICE NO:</td>
+                                                <td style="border-right: solid 1px; border-top: solid 1px; padding:5px; width: 25%;" class="text-right"><span t-field="doc.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-left: solid 1px; padding:5px; width: 15%;">DATE:</td>
+                                                <td style="border-right: solid 1px; padding:5px; width: 25%;" class="text-right"><span t-esc="doc.invoice_date.strftime('%d-%b-%Y')"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-left: solid 1px; padding:5px; width: 15%;">DUE DATE.:</td>
+                                                <td style="border-right: solid 1px; padding:5px; width: 25%;" class="text-right"><span t-esc="doc.invoice_date_due.strftime('%d-%b-%Y')"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-left: solid 1px; padding:5px; width: 15%;">INVOICE TYPE:</td>
+                                                <td style="border-right: solid 1px; padding:5px; width: 25%;" class="text-right"><span t-field="doc.print_status"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-bottom: solid 1px; border-left: solid 1px; padding:5px; width: 15%;">PO No:</td>
+                                                <td style="border-bottom: solid 1px; border-right: solid 1px; padding:5px; width: 25%;" class="text-right"><span t-field="doc.ref"/></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <table style="width: 100%; font-size: 12px" id="total">
+                                <thead>
+                                    <tr>
+                                        <th style="border: solid 1px; padding:10px; width: 3%;" class="text-center">NO</th>
+                                        <th style="border: solid 1px; padding:10px; width: 64%;" class="text-center" colspan="2">Description</th>
+                                        <th style="border: solid 1px; padding:10px; width: 5%;" class="text-center">Qty</th>
+                                        <th style="border: solid 1px; padding:10px; width: 13%;" class="text-center">Unit Price</th>
+                                        <th style="border: solid 1px; padding:10px; width: 15%;" class="text-center">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="i" t-value="1"/>
+                                    <t t-set="j" t-value="0"/>
+                                    <tr t-foreach="doc.invoice_line_ids" t-as="l">
+                                        <td class="text-center" style="border: solid 1px; width: 3%;"><span t-esc="i"/>.</td>
+                                        <td class="text-center" style="border: solid 1px; width: 10%;"><span t-field="l.product_id.default_code"/></td>
+                                        <td class="text-center" style="border: solid 1px; width: 54%;"><span t-field="l.product_id.name"/></td>
+                                        <td class="text-right" style="border: solid 1px; padding: 5px; width: 5%;"><span t-esc="int(l.quantity)" /></td>
+                                        <td class="text-right" style="border: solid 1px; padding: 5px; width: 13%;"><span t-field="l.price_unit"/></td>
+                                        <td class="text-right" style="border: solid 1px; padding: 5px; width: 15%;"><span t-esc="'{0:,.2f}'.format(l.quantity * l.price_unit)"/></td>
+                                        <t t-set="i" t-value="i + 1"/>
+                                        <t t-set="j" t-value="j + (l.quantity * l.price_unit)"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="padding: 5px; width: 70%;">&#160;</td>
+                                    <td style="padding: 5px;">Total</td>
+                                    <td style="padding: 5px;" class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-esc="'{0:,.2f}'.format(j)"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">&#160;</td>
+                                    <td style="padding: 5px; border-bottom: solid 1px;">Discount</td>
+                                    <td style="padding: 5px; border-bottom: solid 1px;" class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-esc="'{0:,.2f}'.format(doc.amount_discount)"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 5px;">&#160;</td>
+                                    <td style="padding: 5px; border-bottom-style:double; border-width:3px;">Net Amount</td>
+                                    <td style="padding: 5px; border-bottom-style:double; border-width:3px;" class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-esc="'{0:,.2f}'.format(doc.amount_total)"/></td>
+                                </tr>
+                            </table>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div>
+                                <table width="100%" style="border: none">
+                                    <tr>
+                                        <td class="text-center" width="25%">.......................................</td>
+                                        <td class="text-center" width="25%">.......................................</td>
+                                        <td class="text-center" width="25%">.......................................</td>
+                                        <td class="text-center" width="25%">.......................................</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center" width="25%">Accepted By</td>
+                                        <td class="text-center" width="25%">Delivered By</td>
+                                        <td class="text-center" width="25%">Checked By</td>
+                                        <td class="text-center" width="25%">Prepared By</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div name="footer_right_column" class="text-right">
+                                <div name="pager" t-if="report_type == 'pdf'">
+                                    <span class="page"/> / <span class="topage"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <!--        <report-->
+        <!--            id="account_invoices_without_payment"-->
+        <!--            model="account.move"-->
+        <!--            string="Invoices without Payment"-->
+        <!--            report_type="qweb-pdf"-->
+        <!--            name="account.report_invoice"-->
+        <!--            file="account.report_invoice"-->
+        <!--            attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"-->
+        <!--            print_report_name="(object._get_report_base_filename())"-->
+        <!--        />-->
+
+        <record id="invoice_paperformat" model="report.paperformat">
+            <field name="name">Invoice</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">20</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">10</field>
+            <field name="dpi">80</field>
+        </record>
+
+
+        <report
+                id="new_invoice_report_action"
+                model="account.move"
+                string="Invoices"
+                report_type="qweb-pdf"
+                menu="False"
+                name="pidilite_core.invoice_report_new"
+                file="pidilite_core.invoice_report_new"
+                print_report_name="(object._get_report_base_filename())"
+                paperformat="invoice_paperformat"
+        />
+    </data>
+</odoo>

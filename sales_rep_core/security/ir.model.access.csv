@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_monthly_visits_allocation,access.monthly.visits.allocation,sales_rep_core.model_monthly_visits_allocation,base.group_user,1,1,1,1
+access_daily_visits_allocation,access.daily.visits.allocation,sales_rep_core.model_daily_visits_allocation,base.group_user,1,1,1,1
+access_customer_visits,access.customer.visits,sales_rep_core.model_customer_visits,base.group_user,1,1,1,1
+access_mobile_messages,access.mobile.messages,sales_rep_core.model_mobile_messages,base.group_user,1,1,1,1
+access_customer_visit_image,access.customer.visit.image,sales_rep_core.model_customer_visit_image,base.group_user,1,1,1,1
+access_visit_comment,access.visit.comment,sales_rep_core.model_visit_comment,base.group_user,1,1,1,1
+

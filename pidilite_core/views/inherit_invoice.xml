@@ -1,0 +1,12 @@
+<odoo>
+    <record id="inherit_invoice_form" model="ir.ui.view">
+        <field name="name">inherit.invoice.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='preview_invoice']" position="after">
+                <button name="download_new_invoice" type="object" string="Print Invoice" attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund'))]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

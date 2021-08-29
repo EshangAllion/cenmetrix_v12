@@ -1,0 +1,26 @@
+<odoo>
+    <record model="ir.ui.view" id="send_approve_payment_terms">
+        <field name="name">PAYMENT TERM EXCEEDED!</field>
+        <field name="model">send.approve.payment.terms</field>
+        <field name="arch" type="xml">
+            <form string="This sale order is over credit limit">
+                <group>
+                    <field name="error_msg" nolabel="1" readonly="1"/>
+                </group>
+                <footer>
+                    <button name="state_change" string="Send Pending Approve Process" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="send_approve_payment_terms_wizard" model="ir.actions.act_window">
+        <field name="name">PAYMENT TERM EXCEEDED!</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">send.approve.payment.terms</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="send_approve_payment_terms"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

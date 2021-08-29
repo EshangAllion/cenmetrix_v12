@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="stock_picking_inherit" model="ir.ui.view">
+            <field name="name">stock.picking.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <field name="is_return" invisible="1"/>
+                    <button name="get_credit_notes" type="object" icon="fa-bars" string="Credit Note" class="oe_stat_button" attrs="{'invisible': ['|', '|', ('state', '!=', 'done'), ('picking_type_id', '!=', 1), ('location_id', '!=', 9)]}">
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

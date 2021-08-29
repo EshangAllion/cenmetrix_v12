@@ -1,0 +1,35 @@
+<odoo>
+    <record model="ir.ui.view" id="inherit_view_tax_form">
+        <field name="name">inherit.view.tax.form</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type_tax_use']" position="after">
+                <field name="vat_type" required="1"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="rental_order_form_view_inherit_1" model="ir.ui.view">
+        <field name="name">rental.order.form.inherit.1</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="vat_type" invisible="1"/>
+                <field name="svat" attrs="{'invisible': [('vat_type', '!=', 's_vat')]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="inherit_view_move_form" model="ir.ui.view">
+        <field name="name">inherit.view.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="amount_residual" position="after">
+                <field name="vat_type" invisible="1"/>
+                <field name="svat" attrs="{'invisible': [('vat_type', '!=', 's_vat')]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

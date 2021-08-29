@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inherit_account_invoice_view_form" model="ir.ui.view">
+        <field name="name">inherit.account.invoice.view.form</field>
+        <field name="model">account.move</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_date']" position="replace">
+                <field name="invoice_date" string="Date" options="{'datepicker': {'warn_future': true}}"
+                                       attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}" readonly="1" groups="partner_credit_limit.group_invoice_back_date_readonly"/>
+                <field name="invoice_date" string="Date" options="{'datepicker': {'warn_future': true}}"
+                                       attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}" readonly="0" groups="partner_credit_limit.group_invoice_back_date_editable"/>
+            </xpath>
+            <xpath expr="//label[@for='invoice_date']" position="replace">
+                <label for="invoice_date" invisible="1"/>
+<!--                <label for="invoice_date" string="Invoice Date" style="font-weight:bold;" attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}" groups="partner_credit_limit.group_invoice_back_date_editable"/>-->
+            </xpath>
+        </field>
+    </record>
+</odoo>
